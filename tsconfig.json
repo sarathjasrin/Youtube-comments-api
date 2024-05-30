@@ -3,7 +3,7 @@
         "files": true
     },
     "compilerOptions": {
-        "target": "es2020",
+        "target": "es5",
         "module": "commonjs",
         "strict": true,
         "esModuleInterop": true,
@@ -34,14 +34,16 @@
             "@middlewares/*": [
                 "src/middlewares/*"
             ],
-        }
+            "@app/*": [
+                "src/app/*"
+            ],
+        },
+        "jsx": "react",
+        "lib": [
+            "es2015", "dom", "dom.iterable", "esnext"
+        ],
     },
-    "lib": [
-        "es2015"
-    ],
-    "include": [
-        "src/**/*.ts"
-    ],
+    "include": [ "src" ],
     "exclude": [
         "node_modules"
     ],

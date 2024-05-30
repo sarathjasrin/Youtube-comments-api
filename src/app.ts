@@ -4,6 +4,7 @@ import sessionFileStore from 'session-file-store'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import morgan from 'morgan'
+import path from 'path'
 import routers from './routes'
 
 const app = express()
@@ -25,6 +26,12 @@ app.use(
     saveUninitialized: true,
     cookie: { secure: false },
   }),
+)
+app.use(
+  express.static(path.resolve(__dirname, '..', 'dist'), { maxAge: '30d' }),
+)
+app.use(
+  express.static(path.resolve(__dirname, '.', 'public'), { maxAge: '30d' }),
 )
 
 app.use('/', routers)

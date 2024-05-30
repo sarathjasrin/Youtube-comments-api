@@ -8,19 +8,25 @@
     "start": "node dist/index.js",
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/app.ts",
     "build": "tsc",
-    "lint": "eslint . --ext ts"
+    "lint": "eslint . --ext ts",
+    "build:client": "esbuild src/app/index.tsx --bundle --outfile=dist/bundle.js --loader:.js=jsx"
   },
   "dependencies": {
     "@types/morgan": "^1.9.9",
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "esbuild": "^0.21.3",
     "express": "^4.17.21",
     "express-session": "^1.18.0",
     "google-auth-library": "^9.9.0",
     "googleapis": "^135.0.0",
     "morgan": "^1.10.0",
     "node-dependency-injection": "^3.1.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "session-file-store": "^1.5.0"
   },
   "devDependencies": {
