@@ -14,6 +14,14 @@ export interface YoutubeModel {
     params: youtube_v3.Params$Resource$Comments$List,
   ): Promise<youtube_v3.Schema$CommentListResponse>
 
+  getChannelById(
+    params: youtube_v3.Params$Resource$Channels$List,
+  ): Promise<youtube_v3.Schema$ChannelListResponse>
+
+  getPlaylistItems(
+    params: youtube_v3.Params$Resource$Playlistitems$List,
+  ): Promise<youtube_v3.Schema$PlaylistItemListResponse>
+
   getCredentials(): Credentials
 }
 

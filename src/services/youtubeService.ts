@@ -40,6 +40,7 @@ export default class YoutubeService
 
   async getSingleCommentThread(commentId: string) {
     const response = await this.youtubeRepository.getCommentThreads({
+      auth: this.authService.getOauthClient(),
       part: ['snippet', 'replies'],
       id: [commentId],
     })
@@ -48,10 +49,29 @@ export default class YoutubeService
 
   async getCommentByCommentId(commentId: string) {
     const response = await this.youtubeRepository.getComment({
+      auth: this.authService.getOauthClient(),
       part: ['id', 'snippet'],
       id: [commentId],
     })
     return response as YoutubeListResponse<Comments>
+  }
+
+  async getChannelById(channelId: string) {
+    const response = await this.youtubeRepository.getChannelById({
+      auth: this.authService.getOauthClient(),
+      part: ['id', 'snippet', 'contentDetails', 'statistics'],
+      id: [channelId],
+    })
+    return response
+  }
+
+  async getPlaylistItems(playlistId: string) {
+    const response = await this.youtubeRepository.getPlaylistItems({
+      auth: this.authService.getOauthClient(),
+      part: ['id', 'snippet'],
+      playlistId,
+    })
+    return response
   }
 
   async processRequest(method: string, postData: PostData) {
@@ -73,6 +93,12 @@ export default class YoutubeService
           break
         case 'getCommentByCommentId':
           data = await this.getCommentByCommentId('commentId')
+          break
+        case 'getChannelById':
+          data = await this.getChannelById(postData.channelId.toString())
+          break
+        case 'getPlaylistItems':
+          data = await this.getChannelById(postData.playlistId.toString())
           break
         default:
           throw new Error('Method not found')

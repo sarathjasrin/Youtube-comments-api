@@ -46,6 +46,20 @@ export default class YoutubeRepository implements YoutubeModel {
     return response.data
   }
 
+  async getChannelById(
+    params: youtube_v3.Params$Resource$Channels$List,
+  ): Promise<youtube_v3.Schema$ChannelListResponse> {
+    const response = await this.service.channels.list(params)
+    return response.data
+  }
+
+  async getPlaylistItems(
+    params: youtube_v3.Params$Resource$Playlistitems$List,
+  ): Promise<youtube_v3.Schema$PlaylistItemListResponse> {
+    const response = await this.service.playlistItems.list(params)
+    return response.data
+  }
+
   async getToken(code: string): Promise<AuthToken> {
     const response = await this.oAuth2Client.getToken(code)
     return response.tokens as AuthToken
